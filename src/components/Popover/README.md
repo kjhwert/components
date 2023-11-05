@@ -6,4 +6,11 @@
 ## 테스트
 
 ## 확인할 것
-1. children으로 전달받은 요소의 ref는 어떻게 가져오고 어떻게 관리할지?
+#### Portal
+> trigger 라이브러리는 Portal을 구성할 때 어떻게 portal을 생성하고 관리하는지? 
+- trigger 라이브러리는 내부적으로 react-component/portal 라이브러리를 사용해서 Portal을 구성.
+- getContainer 함수가 있으면 해당 데이터를 활용, 없으면 useDom hook을 활용
+1. getContainer
+2. useDom hook
+- useState 훅 내부에서 document.createElement
+- useLayoutEffect hook에서 body에 append.
