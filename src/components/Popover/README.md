@@ -16,6 +16,11 @@
 
 #### Meterial UI
 - createPortal을 활용하고 있다.
+- Portal props로 container를 받으면, 해당 element를 활용하고 없다면 document.body를 활용한다.
+- `useEnhancedEffect`? SSR 대응을 위해 브라우저 환경인지를 확인하고 useLayoutEffect or useEffect ([코드 링크](https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useEnhancedEffect/useEnhancedEffect.ts))
+```typescript
+const useEnhancedEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+```
 
 #### 차크라 UI
 - 문서상으로는 default로 Portal을 쓰지 않는다고 되어있다.
