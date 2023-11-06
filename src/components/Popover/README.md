@@ -117,4 +117,22 @@ AntDesign과 Meterial UI 라이브러리 모두 Portal을 활용해서 Popover�
 
 #### 차크라 UI
 - 문서상으로는 default로 Portal을 쓰지 않는다고 되어있다.
-- 무조건 Portal을 써야한다고 생각했는데, translate3d를 활용해서 노출한다. 상위, 하위 요소에 간섭이 없을까?
+- 무조건 Portal을 써야한다고 생각했는데, 차크라 UI는 optional하게 Portal을 적용한다. 기본적으로는 활용하지 않음. portal을 사용하지 않아서 주변 요소 layout에 영향을 주진 않을지?
+- 요소의 position을 잡을 때는 translate3d를 활용해서 노출한다. 성능 상에 훨씬 이점이 있어보인다.
+
+차크라 UI에서 Popover의 positioning을 하는 로직을 찾는데 꽤 어려움을 겪었다.
+- Popover.tsx > usePopover > usePopper > setupPopper > createPopper
+- createPopper는 @popperjs/core 라이브러리에서 제공하는 함수인데, 버전만 유지되고 floating-ui로 대체된 것 같다.
+
+---
+#### createPopper.js
+- createPopper 함수가 return하는 값을 useRef를 활용해서 관리한다.
+- useRef로 관리하는건 알겠는데, 어떻게 inline style로 입힌거지...? `instance.state.styles.popper`의 style하고 실제 적용된 스타일도 조금 다르다.
+
+#### 궁금한 것
+1. popperGenerator 함수 내에서 createPopper를 return하는 클로저를 구성하였는데, 이유가 뭘까?
+2. 
+---
+
+- useDisclosure hook ?
+- useEventListener hook은 유용한 것 같다. ([코드 참고](https://github.com/chakra-ui/chakra-ui/blob/main/packages/hooks/use-event-listener/src/index.ts))
